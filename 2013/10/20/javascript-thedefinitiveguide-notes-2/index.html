@@ -1,0 +1,829 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript, the Definitive Guide: Notes-2 | BULLLUO23</title>
+  <meta name="author" content="bullluo23">
+  
+  <meta name="description" content="some useful code">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JavaScript, the Definitive Guide: Notes-2"/>
+  <meta property="og:site_name" content="BULLLUO23"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="BULLLUO23" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div>
+  <p class="aligncenter title"><a href="/">BULLLUO23</a></p>
+  <p class="aligncenter subtitle"><a href="/">長夜裏的空白 消化不完</a></p>
+</div>
+<nav id="main-nav" class="aligncenter">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+    
+      <li><a href="https://github.com/bullluo23" target="_blank">Github</a></li>
+    
+  </ul>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+     
+        <time datetime="2013-10-21T01:16:10.000Z"><a href="/2013/10/20/javascript-thedefinitiveguide-notes-2/">10月 20 2013</a></time>
+      
+      
+  
+    <h1 class="title">JavaScript, the Definitive Guide: Notes-2</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="some_useful_code">some useful code</h3>
+<p><a id="more"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="comment">// initialize an array a</span>
+<span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;a.length; a[i++]=<span class="number">0</span>);
+</pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="keyword">for</span> (initialization; test; increment) {
+statement;
+}
+<span class="comment">// same as</span>
+initialization;
+<span class="keyword">while</span> (test) {
+statement;
+increment;
+}
+
+<span class="comment">// the above two are not the same when there is a `continue` statement in body of the loop; at `continue`, a while loop will returns directly to its condition, but a for loop first evaluates its increment the returns to condition</span>
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="code"><pre><span class="comment">// array </span>
+<span class="keyword">var</span> x = [<span class="number">1</span>,,<span class="number">3</span>]; <span class="comment">// an array with three elements, middle one undefined</span>
+<span class="keyword">var</span> y = [,,]; <span class="comment">// an array with two elements, both undefined</span>
+x.length; <span class="comment">// 3</span>
+y.length; <span class="comment">// 2</span>
+
+<span class="keyword">var</span> x=[,,,];
+<span class="keyword">var</span> y=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);
+<span class="number">0</span> <span class="keyword">in</span> x; <span class="comment">// chrome and ff gives false, book said true</span>
+<span class="number">0</span> <span class="keyword">in</span> y; <span class="comment">// false</span>
+
+<span class="keyword">var</span> a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];
+a.length = <span class="number">3</span>;
+a; <span class="comment">// [1,2,3];</span>
+a.length=<span class="number">0</span>;
+a; <span class="comment">// []</span>
+a.length = <span class="number">5</span>;
+a; <span class="comment">// [undefined, undefined, undefined, undefined, undefined]</span>
+a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];
+a; <span class="comment">// [1,2,3];</span>
+a.length = <span class="number">4</span>;
+a; <span class="comment">// [1,2,3, undefined]</span>
+</pre></td></tr></table></figure>
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="comment">// test if is an array</span>
+<span class="comment">/* for EMCAScript 5 only */</span>
+<span class="built_in">Array</span>.isArray([<span class="number">1</span>,<span class="number">2</span>,<span class="string">'a'</span>]); <span class="comment">// true</span>
+<span class="built_in">Array</span>.isArray([]); <span class="comment">// true</span>
+<span class="built_in">Array</span>.isArray({}); <span class="comment">// false</span>
+<span class="built_in">Array</span>.isArray({<span class="string">"0"</span>:<span class="number">1</span>, <span class="string">"1"</span>:<span class="number">2</span>, <span class="string">"2"</span>:<span class="string">'a'</span>}); <span class="comment">// false</span>
+
+<span class="comment">/* for EMCAScript 3 */</span>
+<span class="keyword">var</span> isArray = <span class="built_in">Function</span>.isArray || <span class="function"><span class="keyword">function</span><span class="params">(o)</span> {</span>  
+<span class="keyword">return</span> <span class="keyword">typeof</span> o===<span class="string">"object"</span> &amp;&amp; <span class="built_in">Object</span>.prototype.toString.call(o) == <span class="string">"[object Array]"</span>;
+}
+</pre></td></tr></table></figure>
+
+
+
+
+<h4 id="difference_between_var_f_=_function()_{…}_and_function_g(){…}">difference between <em>var f = function() {…}</em> and <em>function g(){…}</em></h4>
+<ul>
+<li>f is function <em>definition</em> statement; g is function <em>declaration</em> statement)</li>
+<li>f only has the declaration hoist at top, thus only before the line f is defined, f is undefined; g has the <em>definition</em> hoist at top, thus g is defined throughout its scope</li>
+<li>function declaration statements createvariables that cannot be deleted</li>
+</ul>
+<h4 id="if_an_else">if an else</h4>
+<ul>
+<li>() are required for <em>if</em> statements</li>
+<li><em>else</em> clause is part of the nearest <em>if</em> statement<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">elseClause</span><span class="params">(i, j, k)</span> {</span>
+<span class="keyword">if</span> (i==j)
+<span class="keyword">if</span> (j==k) console.log(i, j, k);
+<span class="keyword">else</span> console.log(<span class="string">'else'</span>, i,j,k);
+<span class="keyword">return</span>;
+}
+elseClause(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="comment">// else 2 2 3</span>
+elseClause(<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>); <span class="comment">// no output</span>
+</pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Exception">Exception</h4>
+<ul>
+<li>throw exception: runtime error / program explicitly throws one using <code>throw</code> statement; catch exception: <code>try/catch/finally</code> statement</li>
+<li>Error object - has a <em>name</em> property that specifies the type of error and a message property that holds the string passed to the constructor function</li>
+<li><code>try {...} catch(e) {...} finally {...}</code><ul>
+<li>try clause defines the block of code whose exceptions are to be handled</li>
+<li>catch clause is a block of statements that are invoked whenan exception occurs anywhere within the try block</li>
+<li>catch clause is executed iff the try block throws an exception</li>
+<li>final clause are always exectued, no matter the way that try clause terminates<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">factorial</span><span class="params">(n)</span>{</span>
+    <span class="keyword">var</span> j=<span class="number">1</span>;
+    <span class="keyword">if</span> (n&lt;<span class="number">0</span>) <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">"n must be positive."</span>);
+    <span class="keyword">for</span> (<span class="keyword">var</span> i=n; i&gt;<span class="number">1</span>; i--) j *= i;
+    <span class="keyword">return</span> j;
+};
+<span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">2</span>; i&gt;-<span class="number">2</span>; i--) {
+    <span class="keyword">try</span> {
+        console.log(factorial(i));
+    } <span class="keyword">catch</span> (e) {
+        console.log(e.message);
+    }
+};
+</pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="for-in_statement">for-in statement</h4>
+<ul>
+<li><code>for (variable in object) statement</code><ol>
+<li>evaluate object expression, if it is primitive value, it will be converted to equivalent wrapper object; if it is an object (not null/undefined), then</li>
+<li>evaluates the variable expression before <em>each</em> iteration</li>
+<li>assign the name of the enumerable property of the object to the variable expression (note: variable expression must be lvalue or a var statement that declares single variable)</li>
+<li>run a iteration of the statement</li>
+</ol>
+</li>
+</ul>
+<h4 id="Objects_and_properties">Objects and properties</h4>
+<ul>
+<li>3 categories of JavaScript objects and 2 types of properties:<ol>
+<li>native object: an object or class ofobjects defined by the ECMAScript specification (array, function, date, regular expression, etc)</li>
+<li>host object: defined by the host environment (ex. web browser) within which the JavaScript interpreter is embedded.The HTMLElement objects that represent the structure of a web page in client-side JavaScript are host objects. May also be native object</li>
+<li>user-defined object: any object created by the execution of JavaScript code</li>
+<li>own property: defined directly on an object</li>
+<li>inherited property: a property defined by an object’s prototype object</li>
+</ol>
+</li>
+<li>different waysto create an object<ol>
+<li>object literal `var objectName = { property1: value1, property2: value2, …};</li>
+<li>new keyword follow by a function invocation <code>var objectName = new createObject();</code></li>
+<li>inheritance (prototype)</li>
+</ol>
+</li>
+<li>property name need quote when: include space/hyphen; a reserved name (ex. for)</li>
+</ul>
+<h4 id="Prototype">Prototype</h4>
+<ul>
+<li>prototype: each JavaScript object hasa second JavaScript object associated with it, which is <em>prototype</em>, and the first objectinherits properties from the prototype<ul>
+<li>object created by object literals have the same prototype object, refer as <code>Object.prototype</code>; object created by new keyword and constructor invocation use the value of the prototype property of the constructor functio nas their prototype, which inherits from Object.prototype</li>
+</ul>
+</li>
+<li>the linked series of prototype objects is known as a <em>prototype chain</em></li>
+<li><code>Object.create()</code> - create a new object using its first argument as the prototype, and optional second argument which describes the properties of the new object.<ul>
+<li>to create an ordinary empty project, pass in Object.prototype</li>
+<li>if pass in null, the newly created object will inherit nothing, not even basic methods like toString()</li>
+</ul>
+</li>
+<li>check whether an object has a property with a given name:<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="keyword">var</span> obj = {prop:<span class="number">1</span>};
+<span class="string">"prop"</span> <span class="keyword">in</span> obj; <span class="comment">// true</span>
+obj.hasOwnProperty(<span class="string">"prop"</span>); <span class="comment">// true</span>
+obj.prop !== <span class="literal">undefined</span>; <span class="comment">// true</span>
+ 
+<span class="keyword">var</span> inh = <span class="built_in">Object</span>.create(obj);
+inh.ownProp = <span class="number">2</span>;
+inh.propertyIsEnumerable(<span class="string">"prop"</span>); <span class="comment">// false</span>
+inh.propertyIsEnumerable(<span class="string">"ownProp"</span>); <span class="comment">// true</span>
+ 
+<span class="built_in">Object</span>.prototype.propertyIsEnumerable(<span class="string">"toString"</span>); <span class="comment">// false: certain built-in property is not enumerable</span>
+</pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Accessor_properties">Accessor properties</h4>
+<ul>
+<li>accessor properties - properties defined by getters and setters<ul>
+<li>when a program queries the value of an accessor property, JavaScript invokes the getter method, the return value of the getter method become the value of the property access expression</li>
+<li>when a program sets the value of an accessor property, JavaScript invokes the setter method, passing the value of the right-hand side of the assignment. The return value is ignored.<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="code"><pre><span class="keyword">var</span> p={
+    x:<span class="number">1.0</span>, 
+    y:<span class="number">1.0</span>, 
+    get r() { 
+        <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(<span class="keyword">this</span>.x*<span class="keyword">this</span>.x + <span class="keyword">this</span>.y * <span class="keyword">this</span>.y);
+    }, 
+    set r(newvalue) { 
+        <span class="keyword">var</span> oldvalue = <span class="built_in">Math</span>.sqrt(<span class="keyword">this</span>.x*<span class="keyword">this</span>.x+<span class="keyword">this</span>.y*<span class="keyword">this</span>.y);
+        <span class="keyword">var</span> ratio = newvalue/oldvalue; 
+        <span class="keyword">this</span>.x *= ratio; 
+        <span class="keyword">this</span>.y *=ratio;
+}, 
+    get theta() {<span class="keyword">return</span> <span class="built_in">Math</span>.atan2(<span class="keyword">this</span>.y, <span class="keyword">this</span>.x);}
+}
+console.log(p.x, p.y, p.r, p.theta); <span class="comment">// 1 1 1.414 0.785</span>
+p.r = <span class="number">2</span>;
+console.log(p.x, p.y, p.r, p.theta); <span class="comment">// 1.414 1.414 2.000 0.785</span>
+<span class="keyword">var</span> q = <span class="built_in">Object</span>.create(p);
+q.x = <span class="number">0</span>;
+q.y = <span class="number">0</span>;
+console.log(q.r); <span class="comment">// 0</span>
+console.log(p.r); <span class="comment">// 2</span>
+</pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Properties_attributes">Properties attributes</h4>
+<ul>
+<li>each property has its name, value, and <em>property attributes</em><ul>
+<li>the writable: whether the value of the property can be set</li>
+<li>enumerable: whether the property name is returned by a for/in loop</li>
+<li>configurable: whether the property can be deleted and whether its attributes can be altered</li>
+</ul>
+</li>
+<li>four attributes of a data property are value, writable, enumerable and configurable<ul>
+<li>accessor properties don’t have a <em>value</em> or <em>writable</em> attribute, the four attributes are get, set, enumerable and configurable</li>
+</ul>
+</li>
+<li>property descriptor object - has properties with the same names as the attributes of the property it describes; use to represent the set of four attributes</li>
+<li>writable attribute governs attemps to change the value attribute; the configurable attribute governs attemps to change the other attributes (and also whether a property can be deleted)<ul>
+<li>calls to <code>Object.defineProperty()</code> or <code>Object.defineProperties()</code> that attempt to violate throw Type Error<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="keyword">var</span> o = {};
+<span class="built_in">Object</span>.defineProperty(o, x, { value:<span class="number">1</span>, writable: <span class="literal">true</span>, enumerable: <span class="literal">false</span>, configurable: <span class="literal">true</span>});
+o.x; <span class="comment">// 1</span>
+o.hasOwnProperty(<span class="string">"x"</span>); <span class="comment">// true</span>
+o.propertyIsEnumerable(<span class="string">"x"</span>); <span class="comment">//false</span>
+o.x=<span class="number">2</span>; <span class="comment">// o.x is writable</span>
+o.x; <span class="comment">// 2</span>
+<span class="built_in">Object</span>.defineProperty(o,x, { writable: <span class="literal">false</span>});
+o.x=<span class="number">3</span>; <span class="comment">// o.x is not writable</span>
+o.x; <span class="comment">// 2</span>
+<span class="comment">// change x from data property to object property</span>
+<span class="built_in">Object</span>.defineProperty(o, <span class="string">"x"</span>, { get: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span><span class="keyword">return</span> <span class="number">0</span>;}});
+o.x; <span class="comment">// 0</span>
+ 
+<span class="keyword">var</span> p = <span class="built_in">Object</span>.defineProperties({}, {
+        x: {value:<span class="number">1</span>, writable: <span class="literal">true</span>, enumerable: <span class="literal">true</span>, configurable: <span class="literal">true</span>},
+        y: {<span class="comment">/* fill in here */</span>},
+        r: {get: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span><span class="keyword">return</span> <span class="comment">/* fill in *},
+            enumerable: true,
+            configurable: true }
+});</span>
+</pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>every object has associated <em>prototype</em>, <em>class</em> and <em>extensible</em> attributes</li>
+<li>prototype attribute - specifies the object from which it inherits properties<ul>
+<li>check by <code>isPrototypeOf</code> function</li>
+</ul>
+</li>
+<li>class attribute - a string that provides information about the type of the object<ul>
+<li>check indirectly by using <code>toString()</code>; invoke using <code>Function.toString</code> to make sure it is the correct version<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="keyword">var</span> p = <span class="number">23</span>;
+p.toString(); <span class="comment">// "23"</span>
+<span class="built_in">Object</span>.toString(p); <span class="comment">// "function Object() { [native code] }"</span>
+<span class="built_in">Object</span>.prototype.toString(p); <span class="comment">// "[object Object]"</span>
+<span class="built_in">Object</span>.prototype.toString.call(p); <span class="comment">// "[object Number]"</span>
+<span class="built_in">Object</span>.prototype.toString.call(p).slice(<span class="number">8</span>, -<span class="number">1</span>); <span class="comment">// "Number"</span>
+</pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>extensible attribute - specifies whether new properties can be added to the object or not</li>
+<li>object serialization - the process of converting an object’s state to a string from which it can later be restored.<ul>
+<li><code>JSON.stringify()</code>; <code>JSON.parse()</code>; use JSON data interchange format</li>
+</ul>
+</li>
+</ul>
+<h3 id="Functions">Functions</h3>
+<ul>
+<li>4 ways to invoke function: functions, methods, constructors, indirectly through <code>call()</code> and <code>apply()</code> methods</li>
+<li>in ECMAScript 3 and nonstrict ECMAScript 5, the invocation context (<code>this</code> value) is the global object; in strict mode, the invocation context is <code>undefined</code></li>
+<li><p><code>this</code> does not have a scope, and nested functions do not inherit the <code>this</code> value of their caller.</p>
+<ul>
+<li>if a nested function is invoked as a method, its <code>this</code> value is the object it was invoked on</li>
+<li>if a nested function is invoked as a function then its this value will be either the global object or undefined<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="keyword">var</span> o = {
+    m: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+        <span class="keyword">var</span> self=<span class="keyword">this</span>; <span class="comment">// save current this to self</span>
+        console.log(<span class="keyword">this</span> === o); <span class="comment">// true</span>
+        f();
+        <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span> {</span>
+            console.log(<span class="keyword">this</span> === o); <span class="comment">// false - self is now inner function</span>
+            console.log(self === o); <span class="comment">// true - self is the outer this</span>
+        }
+    }
+};
+o.m();
+</pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>constructor invocation - a function or method invocation is preceed by keyword <em>new</em></p>
+</li>
+<li><p><code>call()</code> and <code>apply()</code></p>
+<ul>
+<li>both allow to explicitly specify the <em>this</em> value for the invocation (can invoke any function as a method of an object, even if it is not actually a method of that object)</li>
+<li>both allow to specify the arguments for the invocation</li>
+<li><code>call()</code> uses its own argument list as arguments to the function; <code>apply()</code> expects an array of values to be used as arguments<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="comment">// invoke noArgs, oneArgs, twoArgs... as method of object o</span>
+<span class="comment">// take no arguments</span>
+noArgs.call(o); 
+noArgs.apply(o); 
+<span class="comment">// take one argument</span>
+oneArgs.call(o, <span class="number">1</span>);
+oneArgs.apply(o,<span class="number">1</span>);
+<span class="comment">// take two arguments</span>
+twoArgs.call(o, <span class="number">1</span>, <span class="number">2</span>);
+twoArgs.apply(o, [<span class="number">1</span>,<span class="number">2</span>]);
+
+f.apply(o, array_of_args);
+</pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>JavaScript function definitions do not specify an expected type for the function parameters, and functio n invocations do not do any type checking on the argument values or the number of arguments</p>
+<ul>
+<li>when a function is invoked withfewer arguments than declared parameters, the additional parameters are set to <code>undefined</code></li>
+<li>when a function is invoked with more arguments than  declared parameters, the arguments can be assessed by <code>arguments[i]</code></li>
+<li>note <em>arguments</em> is an object not an array</li>
+<li>in non-strict mode, the array elements of the Arguments object are aliases for the parameters that hold the function arguments; i.e., change one also changes another</li>
+<li>varargs functions (or variadic/variable arity functions) - functions that can accept any number of arguments</li>
+</ul>
+</li>
+</ul>
+<h4 id="callee_and_caller_properties"><em>callee</em> and <em>caller</em> properties</h4>
+<pre><code>+    strict mode: raise a TypeError <span class="keyword">if</span> <span class="keyword">try</span> <span class="keyword">to</span> <span class="command">read</span>/<span class="command">write</span>
++    non-strict mode: *callee* refers <span class="keyword">to</span> <span class="keyword">the</span> currently <span class="property">running</span> function, which <span class="keyword">is</span> occasionally usefu lto allow unamed functions <span class="keyword">to</span> call themselves recursively; *caller* refers <span class="keyword">to</span> <span class="keyword">the</span> function <span class="keyword">that</span> called this one (nonstandard), which gives access <span class="keyword">to</span> <span class="keyword">the</span> call stack
+</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="keyword">var</span> f=<span class="function"><span class="keyword">function</span><span class="params">(x, <span class="comment">/*optional*/</span> y)</span> {</span>
+    y = y || <span class="number">2</span>;
+    console.log(x, y);
+}
+f(<span class="number">1</span>,<span class="number">3</span>); <span class="comment">// 1, 3</span>
+f(<span class="number">1</span>); <span class="comment">// 1, 2</span>
+
+<span class="keyword">var</span> g=<span class="function"><span class="keyword">function</span><span class="params">(x)</span> {</span>
+    console.log(<span class="string">"number of arguments: "</span>, <span class="built_in">arguments</span>.length);
+    <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="built_in">arguments</span>) {
+        console.log(<span class="built_in">Number</span>(i)+<span class="number">1</span> + <span class="string">"th argument: "</span>, <span class="built_in">arguments</span>[i]);
+    }
+}
+g(<span class="number">1</span>); <span class="comment">// number of arguments: 1 \n 1th argument: 1</span>
+g(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>); <span class="comment">// number of arguments: 3 \n 1th argument: a \n 2th argument: b \n 3th argument: c</span>
+
+<span class="keyword">var</span> h=<span class="function"><span class="keyword">function</span><span class="params">(x)</span> {</span>
+    console.log(x); <span class="comment">// 0</span>
+    <span class="built_in">arguments</span>[<span class="number">0</span>] ++;
+    console.log(x); <span class="comment">// 1</span>
+}
+h(<span class="number">0</span>);
+
+(<span class="function"><span class="keyword">function</span> <span class="params">(x)</span> {</span>
+    <span class="keyword">if</span> (x &lt;=<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;
+    <span class="keyword">return</span> x * <span class="built_in">arguments</span>.callee(x-<span class="number">1</span>);
+})(<span class="number">3</span>); <span class="comment">// 6</span>
+</pre></td></tr></table></figure>
+
+<h4 id="Function_as_Object">Function as Object</h4>
+<ul>
+<li>Functions are not primitive values in JavaScript, but a specialized kind of object, which means they can have properties<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="code"><pre>uniqueInteger.counter = <span class="number">0</span>; <span class="comment">// can do this because hoisting</span>
+<span class="function"><span class="keyword">function</span> <span class="title">uniqueInteger</span><span class="params">()</span> {</span>
+<span class="keyword">return</span> uniqueInteger.counter++;
+}
+uniqueInteger(); <span class="comment">// 0</span>
+uniqueInteger(); <span class="comment">// 1</span>
+uniqueInteger(); <span class="comment">// 2</span>
+<span class="comment">// ...</span>
+
+<span class="keyword">var</span> uniqueInteger = (
+    <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+        <span class="keyword">var</span> counter=<span class="number">0</span>;
+        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span> <span class="keyword">return</span> counter++; };
+    }());
+
+<span class="function"><span class="keyword">function</span> <span class="title">counter</span><span class="params">()</span> {</span>
+    <span class="keyword">var</span> n = <span class="number">0</span>;
+    <span class="keyword">return</span> {
+        count: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span> <span class="keyword">return</span> n++; },
+        reset: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span> n = <span class="number">0</span>; }
+    };
+}
+<span class="keyword">var</span> c = counter(), d = counter(); <span class="comment">// Create two counters</span>
+console.log(c.count()); <span class="comment">// 0</span>
+console.log(c.count()); <span class="comment">// 1</span>
+console.log(d.count()); <span class="comment">// 0 --&gt; c and d count separately</span>
+c.reset(); <span class="comment">// reset() and count() methods share state</span>
+console.log(c.count()); <span class="comment">// 0</span>
+d.count() <span class="comment">// 1</span>
+</pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Lexical_scope">Lexical scope</h3>
+<ul>
+<li>lexical scoping rule:functions are executed using the scope chain that was in effect when they are defined</li>
+<li>any arguments pass to <code>bind()</code> after the first are bound along with the this value —&gt; <em>currying</em><figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">(y)</span> {</span> <span class="keyword">return</span> <span class="keyword">this</span>.x + y; } 
+<span class="keyword">var</span> o = { x : <span class="number">1</span> };
+<span class="keyword">var</span> g = f.bind(o); <span class="comment">// bind f() to o, call on g will call o.f</span>
+g(<span class="number">2</span>) <span class="comment">// 3</span>
+
+<span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span><span class="params">(x,y)</span> {</span> <span class="keyword">return</span> x + y }; 
+<span class="keyword">var</span> succ = sum.bind(<span class="literal">null</span>, <span class="number">1</span>); <span class="comment">// x is bound to 1</span>
+succ(<span class="number">2</span>) <span class="comment">// 3 (pass 2 for y)</span>
+<span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">(y,z)</span> {</span> <span class="keyword">return</span> <span class="keyword">this</span>.x + y + z }; 
+<span class="keyword">var</span> g = f.bind({x:<span class="number">1</span>}, <span class="number">2</span>); <span class="comment">//  f bind to {x:1}, y bind to 2</span>
+g(<span class="number">3</span>) <span class="comment">// 6</span>
+</pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="notes">notes</h3>
+<ul>
+<li><strong>it is harmless to declare the same variable multiple times</strong> (because of <u>hoisting</u>)</li>
+<li>the matching case of switch statement uses identity operator ===, not equality operator ==<ul>
+<li>expression must match without type conversion</li>
+</ul>
+</li>
+<li>order of property enumeration<ul>
+<li>simple object: order in which properties are defined</li>
+<li>object literal - order that properties appear in the literal</li>
+<li>implementation dependent: inherits enumerable properties; properties that interger array indexes; used <code>delete</code>; used <code>Object.defineProperty()</code> or similar methods to alter property attributes of the object</li>
+</ul>
+</li>
+<li><p>function constructor <code>var f = new Function(&quot;x&quot;, &quot;y&quot;, &quot;return x*y);</code></p>
+<ul>
+<li>the last argument is the text of function body, all other arguments to the constructor are strings that specify the parameters names for the function</li>
+<li>creates anonymous functions</li>
+<li>dynamically create and compile functions at runtime</li>
+<li>parses the function body and create a new function object each time it is called</li>
+<li>such functions do NOT use lexical scoping; instead, they are always compiled as if they were top-level functions</li>
+</ul>
+</li>
+<li><p><em>callable object</em> - any object that can be invoked in a function invocation expression</p>
+<ul>
+<li>all functions are callable, but not all callable objects are functions</li>
+<li>two situations: IE8 or lower client-side methods (callable host objects); RegExp objects can invoke directly as shortcut for invoking its exec()</li>
+<li>to determine true function object <code>Object.prototype.toString.call(x) == &quot;[object Function]&quot;;</code></li>
+</ul>
+</li>
+<li><p><em>higher-order function</em> - a function that operates on functions, taking one or more functions as arguments and returning a new function</p>
+</li>
+<li><em>memorization</em> - a function that cached its previously computed results</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/tech/">tech</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript/">JavaScript</a>, <a href="/tags/reading/">reading</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:bullluo23.github.io">
+  </form>
+</div>
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/life/">life</a><small>6</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>7</small></li>
+  
+  </ul>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>2</small></li>
+  
+    <li><a href="/tags/book/">book</a><small>1</small></li>
+  
+    <li><a href="/tags/coop/">coop</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mary-see-the-future/">mary see the future</a><small>1</small></li>
+  
+    <li><a href="/tags/mayday/">mayday</a><small>1</small></li>
+  
+    <li><a href="/tags/movie/">movie</a><small>2</small></li>
+  
+    <li><a href="/tags/music/">music</a><small>2</small></li>
+  
+    <li><a href="/tags/personal/">personal</a><small>3</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>1</small></li>
+  
+    <li><a href="/tags/reading/">reading</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+  
+
+
+    
+<footer id="footer" class="inner"><div>
+  Power by <a href="http://zespia.tw/hexo/">Hexo</a>
+  
+  &copy; 2014 bullluo23
+  
+</div>
+<div class="clearfix"></div></footer></aside>
+    <div class="clearfix"></div>
+  </div>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

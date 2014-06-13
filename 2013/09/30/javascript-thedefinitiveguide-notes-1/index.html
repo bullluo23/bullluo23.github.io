@@ -1,0 +1,388 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript, the Definitive Guide: Notes-1 | BULLLUO23</title>
+  <meta name="author" content="bullluo23">
+  
+  <meta name="description" content="lexical structure - the set of elementary rules that specifies how you write programs in that language">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JavaScript, the Definitive Guide: Notes-1"/>
+  <meta property="og:site_name" content="BULLLUO23"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="BULLLUO23" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div>
+  <p class="aligncenter title"><a href="/">BULLLUO23</a></p>
+  <p class="aligncenter subtitle"><a href="/">長夜裏的空白 消化不完</a></p>
+</div>
+<nav id="main-nav" class="aligncenter">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+    
+      <li><a href="https://github.com/bullluo23" target="_blank">Github</a></li>
+    
+  </ul>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+     
+        <time datetime="2013-09-30T04:50:12.000Z"><a href="/2013/09/30/javascript-thedefinitiveguide-notes-1/">9月 30 2013</a></time>
+      
+      
+  
+    <h1 class="title">JavaScript, the Definitive Guide: Notes-1</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ul>
+<li>lexical structure - the set of elementary rules that specifies how you write programs in that language<a id="more"></a></li>
+<li>case sensitive -&gt; HTML tag/attributes must in lower case</li>
+<li>if a line break appeaer after <em>return</em>, <em>break</em>, <em>continue</em>, JavaScript always interpret that line break as semicolon<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="keyword">return</span>
+<span class="literal">true</span>;
+<span class="comment">// same as</span>
+<span class="keyword">return</span>;
+<span class="literal">true</span>;
+
+x
+++
+y;
+<span class="comment">// same as</span>
+x;
+++y;
+</pre></td></tr></table></figure></li>
+<li>not-a-number value does not compare equal to any value, including itself</li>
+<li>0 and -0 are euqal, but 1/0 and 1/(-0) are not</li>
+<li><code>Infinity</code> and <code>NaN</code> are read/write-able in ECMAScript3 only</li>
+<li><code>Number.POSITIVE_INFINITY</code>, <code>Number.NEGATIVE_INFINITY</code> and <code>Number.NaN</code> are read-only<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre><span class="comment">// var x = ...;</span>
+<span class="keyword">if</span> (x!=x) {
+    console.log(<span class="string">"x is NaN"</span>);
+};
+
+<span class="keyword">var</span> zero = <span class="number">0</span>;
+<span class="keyword">var</span> negzero = -<span class="number">0</span>;
+console.log(zero ==negzero); <span class="comment">// true</span>
+console.log((<span class="number">1</span>/zero) == (<span class="number">1</span>/negzero)); <span class="comment">// false</span>
+
+console.log(<span class="literal">Infinity</span> == <span class="built_in">Number</span>.POSITIVE_INFINITY); <span class="comment">// true</span>
+console.log(<span class="literal">Infinity</span> == (<span class="number">1</span>/zero)); <span class="comment">// true</span>
+console.log((<span class="number">1</span>/negzero) == <span class="built_in">Number</span>.NEGATIVE_INFINITY); <span class="comment">// true</span>
+<span class="comment">// Infinity = 3; // ECMAScript3 only</span>
+</pre></td></tr></table></figure></li>
+<li>however, when actually run <code>console.log(Infinity == Number.MAX_VALUE+1);</code>, it will give <code>False</code>. See <a href="http://stackoverflow.com/questions/10837670/adding-to-number-max-value" target="_blank" rel="external">StackOverflow</a></li>
+<li>global object - a regular Javascript object that the properties of this object are blobally defined symbol availiable to JavaScript program</li>
+<li>evaluate to False: undefined, null, 0, -0, NaN, “”</li>
+<li>difference between undefined and null:<ul>
+<li>undefined - predefined global variable, error</li>
+<li>null - language keyword, expected, absence of value<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="keyword">var</span> x,y;
+x = <span class="literal">null</span>;
+console.log(x); <span class="comment">// null</span>
+console.log(y); <span class="comment">// undefined</span>
+console.log(<span class="keyword">typeof</span> x); <span class="comment">// obejct</span>
+console.log(<span class="keyword">typeof</span> y); <span class="comment">// undefined</span>
+</pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>objects are compared by reference instead of value<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="keyword">var</span> x = {a:<span class="number">1</span>, b:<span class="number">2</span>};
+<span class="keyword">var</span> y = {a:<span class="number">1</span>, b:<span class="number">2</span>};
+<span class="keyword">var</span> z = x;
+console.log(x == y); <span class="comment">// false</span>
+console.log(x == z); <span class="comment">// true</span>
+z.a = <span class="number">3</span>;
+console.log(x.a); <span class="comment">// 3</span>
+</pre></td></tr></table></figure></li>
+<li>block scope - each block of code whithin {} has its own scope; variables are not visible outside of the block which they are declaired</li>
+<li>function scope - var are visible within the function in which they are defined and whithinand function that are nested whithin that funciton<ul>
+<li>note the variables are availiable <em>throughout</em> the function</li>
+<li>hoisting - JavaScript code behave as if all variables declared in a function are hoisted to top of function<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="keyword">var</span> x = <span class="number">3</span>;
+<span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span> {</span>
+    console.log(x); <span class="comment">// undefined (x within f, not yet initialized)</span>
+    <span class="keyword">var</span> x = <span class="number">1</span>;
+    console.log(x); <span class="comment">// 1</span>
+};
+f();
+</pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>delete variables as properties<ul>
+<li>true if the variable is deleted</li>
+<li>cannot delete - built in core and client-side properties; user defined variable with <code>var</code> statement<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="keyword">var</span> dontDelete =<span class="number">1</span>;
+canDelete = <span class="number">2</span>;
+<span class="keyword">delete</span> dontDelete; <span class="comment">// false **see note</span>
+<span class="keyword">delete</span> canDelete; <span class="comment">// true</span>
+console.log(dontDelete); <span class="comment">// 1</span>
+<span class="comment">// console.log(canDelete); // ReferenceError</span>
+</pre></td></tr></table></figure></li>
+<li>note: dontDelete will actually successful deleted if the code is run in Firebug console, because in Firebug, code are fun as Eval code, instead of Global Code / Function Code. See <a href="http://perfectionkills.com/understanding-delete/" target="_blank" rel="external">this article</a></li>
+</ul>
+</li>
+<li>scope chain - a list or chain of objects that defines the variables that are in scope for that code<ul>
+<li>define function - stores the scope chain then in effect</li>
+<li>invoke function - create new object to store its local variable and adds new object to the stored scope chain to create new, longer chain then represent the scope for that function invocation</li>
+</ul>
+</li>
+<li>order of evalute invocation expression:<ol>
+<li>function expression; if not callable —&gt; TypeError</li>
+<li>argument expression; produce a list of argument values</li>
+<li>argument values are assigned in order</li>
+<li>body of function is executed</li>
+</ol>
+</li>
+<li>instance of<ul>
+<li>LHS: object; RHS: identifies a class of object, function</li>
+</ul>
+</li>
+<li>void - evluate operand then discard value, return <code>undefiend</code><ul>
+<li>to eliminate side effect<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="comment">// run in Chrome console</span>
+<span class="keyword">var</span> x=<span class="number">3</span>; <span class="comment">// 3</span>
+<span class="keyword">void</span>(x=<span class="number">1</span>); <span class="comment">// undefined</span>
+x; <span class="comment">// 1</span>
+</pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>comma: <code>statement1, statement2, ... , last_statement;</code><ul>
+<li>first statements will be execute, their value will be discard;</li>
+<li>Racket: <code>(begin statement1 statement2 ... last_statement)</code></li>
+</ul>
+</li>
+<li>eval()<ul>
+<li>pass a string - attemps to parse the string as JavaScript, throwing a SyntaxError if it fails; or evaluates the code and returns the value of the last expression or statement in the string or undefined if the last expression or statement had no value; if the string throws an exception, the eval() propagates that expression</li>
+<li>eval() operate on the level of the scope it is currently in</li>
+</ul>
+</li>
+<li>global eval()<ul>
+<li>if define an alias of eval, i.e. <code>var geval =eval;</code>, most implementors wouldevlauate the string as top=level global code, and it could not use/modify variables local to the calling function (thus would not interfere with local optimizations)</li>
+<li>this is called <em>indirect eval</em>, as the unqualified name “eval” is called <em>direct eval</em></li>
+<li>note: in ECMAScript 3, this would throw EvalError<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre>val geval =eva; <span class="comment">// an alias</span>
+<span class="keyword">var</span> x = <span class="number">1</span>, y=<span class="number">1</span>;
+<span class="function"><span class="keyword">function</span> <span class="title">direct</span><span class="params">()</span> {</span>
+<span class="keyword">var</span> x=<span class="number">2</span>;
+<span class="built_in">eval</span>(<span class="string">"x *= 10;"</span>);
+<span class="keyword">return</span> x;
+}
+<span class="function"><span class="keyword">function</span> <span class="title">indirect</span><span class="params">()</span>{</span>
+<span class="keyword">var</span> y=<span class="number">2</span>;
+<span class="built_in">eval</span>(<span class="string">"y *= 10;"</span>);
+<span class="keyword">return</span> y;
+}
+console.log(direct(),  x); <span class="comment">// 20 1</span>
+console.log(indirect(), y); <span class="comment">//2 10</span>
+</pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/tech/">tech</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript/">JavaScript</a>, <a href="/tags/reading/">reading</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:bullluo23.github.io">
+  </form>
+</div>
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/life/">life</a><small>6</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>7</small></li>
+  
+  </ul>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>2</small></li>
+  
+    <li><a href="/tags/book/">book</a><small>1</small></li>
+  
+    <li><a href="/tags/coop/">coop</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mary-see-the-future/">mary see the future</a><small>1</small></li>
+  
+    <li><a href="/tags/mayday/">mayday</a><small>1</small></li>
+  
+    <li><a href="/tags/movie/">movie</a><small>2</small></li>
+  
+    <li><a href="/tags/music/">music</a><small>2</small></li>
+  
+    <li><a href="/tags/personal/">personal</a><small>3</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>1</small></li>
+  
+    <li><a href="/tags/reading/">reading</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+  
+
+
+    
+<footer id="footer" class="inner"><div>
+  Power by <a href="http://zespia.tw/hexo/">Hexo</a>
+  
+  &copy; 2014 bullluo23
+  
+</div>
+<div class="clearfix"></div></footer></aside>
+    <div class="clearfix"></div>
+  </div>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
